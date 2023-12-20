@@ -37,9 +37,9 @@ void system_init()
 
     /* configure the main internal regulator output voltage */
     SET_BIT(RCC->APB1ENR, RCC_APB1ENR_PWREN);
-    MODIFY_REG(PWR->CR, PWR_CR_VOS_Msk, PWR_CR_VOS_1);
+    MODIFY_REG(PWR->CR, PWR_CR_VOS_Msk, PWR_CR_VOS_1 | PWR_CR_VOS_0);
 
-    /* enable the external High Speed Clock @25MHz*/
+    /* enable the external High Speed Clock @8MHz*/
     SET_BIT(RCC->CR, RCC_CR_HSEON);
     do {
     } while ((RCC->CR & RCC_CR_HSERDY_Msk) != RCC_CR_HSERDY);
@@ -88,12 +88,30 @@ void system_init()
     SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOCEN);
     SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOHEN);
 
+    /* enable APB2 devices */
+    SET_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM10EN);
+    SET_BIT(RCC->APB2ENR, RCC_APB2ENR_SYSCFGEN);
+
     /* one us timer for delay */
     TIM10->PSC = (configCPU_CLOCK_HZ / 1000000) - 1;
     MODIFY_REG(TIM10->CR1, TIM_CR1_CEN_Msk, TIM_CR1_CEN);
 
     /* stop timer when debuggng */
     SET_BIT(DBGMCU->APB2FZ, DBGMCU_APB2_FZ_DBG_TIM10_STOP);
+
+    /* ITM trace configuration */
+    SET_BIT(DBGMCU->CR, DBGMCU_CR_TRACE_IOEN);
+    TPI->SPPR = 0x00000002;              /* "Selected PIN Protocol Register": Select which protocol to use for trace output (2: SWO NRZ, 1: SWO Manchester encoding) */
+    TPI->ACPR = 96000000 / 960000 - 1;   /* Divisor for Trace Clock is Prescaler + 1 */
+    TPI->FFCR = 0x00000100;              /* Formatter and Flush Control Register */
+    ITM->LAR  = 0xC5ACCE55;              /* ITM Lock Access Register, C5ACCE55 enables more write access to Control Register 0xE00 :: 0xFFC */
+    ITM->TCR  = ITM_TCR_TraceBusID_Msk | 
+                ITM_TCR_SWOENA_Msk     | 
+                ITM_TCR_SYNCENA_Msk    | 
+                ITM_TCR_ITMENA_Msk;      /* ITM Trace Control Register */
+    ITM->TPR  = ITM_TPR_PRIVMASK_Msk;    /* ITM Trace Privilege Register */
+    ITM->TER  = 0x01;                    /* ITM Trace Enable Register. Enabled tracing on stimulus ports. One bit per stimulus port. */
+    DWT->CTRL = 0x400003FE;              /* DWT_CTRL */
 }
 
 /**

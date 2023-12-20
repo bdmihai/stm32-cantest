@@ -25,6 +25,9 @@
  |                                                                            |
  |___________________________________________________________________________*/
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "stm32f4xx.h"
 #include "stm32rtos.h"
 #include "task.h"
@@ -38,7 +41,8 @@ void main_task(void *pvParameters)
     (void)pvParameters;
 
     for (;;) {
-        vTaskDelay(10000 / portTICK_PERIOD_MS);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        printf("Blink!\n");
     }
 }
 

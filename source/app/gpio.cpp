@@ -35,7 +35,7 @@ void gpio_init()
     /* disable JTAG */
     MODIFY_REG(GPIOA->MODER,    GPIO_MODER_MODER15_Msk,     0);                         /* JTDI disabled */
     MODIFY_REG(GPIOB->MODER,    GPIO_MODER_MODER4_Msk,      0);                         /* NJTRST disabled */
-    MODIFY_REG(GPIOB->MODER,    GPIO_MODER_MODER3_Msk,      0);                         /* JTDO disabled */
+    //MODIFY_REG(GPIOB->MODER,    GPIO_MODER_MODER3_Msk,      0);                         /* JTDO disabled */
 
     /* configure LED pin */
     MODIFY_REG(GPIOB->MODER,    GPIO_MODER_MODER0_Msk,     GPIO_MODER_MODER0_0);        /* set the pin as output */
