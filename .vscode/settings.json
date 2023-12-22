@@ -25,7 +25,8 @@
         "gpio.h": "c",
         "stdarg.h": "c",
         "stdbool.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "printf.h": "c"
     },
     "Open files list": false,
     "Toggle terminal": false,

@@ -12,7 +12,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make -j 20",
+            "command": "make -j 8",
             "problemMatcher": ["$gcc"],
             "group": {
                 "kind": "build",
@@ -38,6 +38,12 @@
             "type": "shell",
             "command": "make clean",
             "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "reset",
+            "type": "shell",
+            "command": "make reset",
+            "problemMatcher": []
         }
     ]
 }
