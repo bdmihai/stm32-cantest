@@ -3,11 +3,11 @@
         {
             "name": "Linux",
             "includePath": [
-                "./source/cmsis/ARM/**",
-                "./source/cmsis/STM32F4xx/**",
-                "./source/hal/STM32F4xx/**",
-                "./source/boot/STM32F4xx/**",
-                "./source/freertos/**",
+                "${workspaceFolder}/source/cmsis/**",
+                "${workspaceFolder}/source/cmsis/core",
+                "${workspaceFolder}/source/boot/**",
+                "${workspaceFolder}/source/runtime/**",
+                "${workspaceFolder}/source/freertos/**",
                 "/usr/lib/gcc/arm-none-eabi/13.2.0/include/**",
                 "/usr/lib/gcc/arm-none-eabi/13.2.0/include-fixed/**",
                 "/usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/include/**"
