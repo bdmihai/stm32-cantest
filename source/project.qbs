@@ -28,14 +28,14 @@
 import qbs
 
 Project {
-    name: 'cantest'
+    name: 'blink'
     minimumQbsVersion: '1.22'
     qbsSearchPaths: '../qbs'
 
     references: [
         'boot/boot.qbs',
         'cmsis/cmsis.qbs',
-        //'hal/hal.qbs',
+        'hal/hal.qbs',
         'runtime/runtime.qbs',
         'freertos/freertos.qbs',
         'app/app.qbs'

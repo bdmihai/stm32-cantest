@@ -26,8 +26,8 @@
 #|____________________________________________________________________________|
 
 CONFIG_MCU                  = STM32F412ZG
-CONFIG_OPENOCD              = openocd
-CONFIG_OPENOCDCONFIGDIR     = ~/work/tools/openocd/tcl
+CONFIG_OPENOCD              = /usr/local/bin/openocd
+CONFIG_OPENOCDCONFIGDIR     = /usr/local/share/openocd/scripts
 CONFIG_OPENOCD_INTERFACE    = interface/stlink.cfg
 CONFIG_OPENOCD_BOARD        = board/stm32f412xx.cfg
 
